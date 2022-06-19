@@ -1,7 +1,8 @@
 # Financial Front
 
 # Tópico 1 - Clonar este projeto através do github
-    yarn remove react-scripts
+    --> yarn install
+
     --> yarn start 
 
 
@@ -20,10 +21,14 @@ yarn add next axios react-bootstrap bootstrap@4.6.0
 --> após criar --> 
 
 git init
+
 git commit -m "first commit"
+
 git branch -M main
+
 # "link dependerá do nome escolhido para o repositório"
 git remote add origin  https://github.com/Leandrovargas0/financial-control-front.git
+
 git push -u origin main
 
 # ---------------------------------------------------------
