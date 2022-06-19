@@ -1,3 +1,46 @@
+# Financial Front
+
+# Tópico 1 - Clonar este projeto através do github
+    yarn remove react-scripts
+    --> yarn start 
+
+
+# -----------------------------------------------------------------------
+# tópico 2 - Iniciar projeto do zero e criar no git
+    ------> pule para o tópico 2, pois este projeto já foi criado
+
+sudo npm install --global yarn
+yarn global add create-react-app
+yarn create react-app financial
+yarn start
+yarn remove react-scripts
+yarn add next axios react-bootstrap bootstrap@4.6.0
+
+# Cria-se o repositório no github 
+--> após criar --> 
+
+git init
+git commit -m "first commit"
+git branch -M main
+# "link dependerá do nome escolhido para o repositório"
+git remote add origin  https://github.com/Leandrovargas0/financial-control-front.git
+git push -u origin main
+
+# ---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ----------- Padrão inicialização com yarn/ create react app
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
