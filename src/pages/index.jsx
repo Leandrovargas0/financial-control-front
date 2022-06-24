@@ -1,17 +1,12 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, Row, Button } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Layout from '../components/Layout/layout';
 
 
 export default function homeindex() {
-    return <Container>
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/"></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-    </Container>;
+    return <Layout title="Home">
+        <Row className="float-right row pb-2 pr-5">
+            <Button variant="primary" href="/home/add">+ Adicionar</Button>
+        </Row>
+    </Layout>;
 }
