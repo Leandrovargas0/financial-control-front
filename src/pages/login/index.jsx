@@ -21,14 +21,21 @@ export default function Login() {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
-                  },
+                    },
                     body: JSON.stringify({ username: username, password: password })
                 };
                 fetch('http://localhost:8080/login', parametros)
                     .then((res) => res.json())
                     .then((res) => {
-                        window.localStorage.setItem("token", res['token']);
-                        router.push('/');
+                        var token = res['token'];
+                        console.log(token);
+                        if (token != undefined) {
+                            window.localStorage.setItem("token", token);
+                            router.push('/');
+                        }
+                        else {
+                            alert("Usuário ou senha incorretos.");
+                        }
                     })
                     .catch((e) => alert("Usuário ou senha incorretos."));
             } catch (err) {
