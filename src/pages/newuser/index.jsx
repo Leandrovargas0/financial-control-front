@@ -7,13 +7,10 @@ import { useRouter } from 'next/router';
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [completeName, setCompleteName] = useState('');
+
     const [erro, setErro] = useState('');
     const router = useRouter();
-
-    const newuser = (e) => {
-        e.preventDefault();
-        router.push('/newuser');
-    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,22 +24,12 @@ export default function Login() {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ username: username, password: password })
+                    body: JSON.stringify({ username: username, password: password, name: completeName })
                 };
                 fetch('http://localhost:8080/login', parametros)
                     .then((res) => res.json())
                     .then((res) => {
-                        var token = res['token'];
-                        var financialcontrol = res['id'];
-                        
-                        if (token != undefined) {
-                            window.localStorage.setItem("token", token);
-                            window.localStorage.setItem("financialcontrol", financialcontrol);
-                            router.push('/');
-                        }
-                        else {
-                            alert("Usuário ou senha incorretos.");
-                        }
+                        router.push('/login');
                     })
                     .catch((e) => alert("Usuário ou senha incorretos."));
             } catch (err) {
@@ -55,6 +42,14 @@ export default function Login() {
         <Container>
             <Form onSubmit={handleSubmit}>
                 {erro}
+
+
+                <Form.Group controlId="form-CompleteName">
+                    <Form.Label>Nome Completo:</Form.Label>
+                    <Form.Control type="text" placeholder="Digite seu nome completo"
+                        onChange={(e) => setCompleteName(e.target.value)}></Form.Control>
+                </Form.Group>
+
                 <Form.Group controlId="form-username">
                     <Form.Label>Username:</Form.Label>
                     <Form.Control type="text" placeholder="Digite seu usuário"
@@ -68,13 +63,10 @@ export default function Login() {
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
-                    Logar
+                    Salvar
                 </Button>
 
 
-                <Button variant="info" onClick={(e) => newuser(e)} type="button">
-                    Novo?
-                </Button>
 
             </Form>
         </Container>

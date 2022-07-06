@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Api } from '../../services/api';
 
-export default function FormCompany({ id }) {
-
+export default function FormCompany({id}) {
+   
     const [nome, setCorporateName] = useState("");
     const [cnpj, setCnpj] = useState("");
     const [address, setAddress] = useState("");
@@ -16,24 +16,18 @@ export default function FormCompany({ id }) {
     const [cpf, setCpf] = useState("");
 
     const [erro, setErro] = useState(false);
+    //const [api, setApi] = useState(new Api('/company/'));
+
     const router = useRouter();
-    const api = new Api('/company/');
+    const api = new Api('/company');
+    //const api2 = new Api('/company/update');
+
 
     useEffect(() => {
         try {
             if (id != undefined) {
                 api.listar(id)
-                    .then( (res) => {
-                        setCorporateName(res.data['corporateName']);
-                        setCnpj(res.data['cnpj']);
-                        setAddress(res.data['address']);
-                        setCounty(res.data['county']);
-                        setZipCode(res.data['zipCode']);
-                        setPhone(res.data['phone']);
-                        setMail(res.data['mail']);
-                        setTitularName(res.data['titularName']);
-                        setCpf(res.data['cpf']);
-                    })
+                    .then((res) => setCamposJson(res))
                     .catch(err => setErro("Erro ao recuperar entidade!"));
             }
         } catch (erro) {
@@ -41,12 +35,28 @@ export default function FormCompany({ id }) {
         }
     }, [id]);
 
+
+    const setCamposJson = (res) => {
+        setCorporateName(res.data['corporateName']);
+        setCnpj(res.data['cnpj']);
+        setAddress(res.data['address']);
+        setCounty(res.data['county']);
+        setZipCode(res.data['zipCode']);
+        setPhone(res.data['phone']);
+        setMail(res.data['mail']);
+        setTitularName(res.data['titularName']);
+        setCpf(res.data['cpf']);
+        
+        console.log(id);
+        //alert(12314124);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            const disciplina = {
+            const compania = {
                 id: id,
-                corporateName: corporateName,
+                corporateName: nome,
                 cnpj: cnpj,
                 address: address,
                 county: county,
@@ -56,7 +66,9 @@ export default function FormCompany({ id }) {
                 titularName: titularName,
                 cpf: cpf,
             };
-            api.salvar(disciplina)
+
+            // setApi(new Api('/company/update'));
+            api.salvar(compania)
                 .then(res => router.push('/'))
                 .catch(err => {
                     if (err.response?.data) {
@@ -144,8 +156,10 @@ export default function FormCompany({ id }) {
         </Form>
     </Container>;
 }
+
+
 FormCompany.defaultProps = {
-    id: 1
+    id: undefined
 };
 
 
