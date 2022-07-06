@@ -19,7 +19,7 @@ export default function FormCompany({id}) {
     //const [api, setApi] = useState(new Api('/company/'));
 
     const router = useRouter();
-    const api = new Api('/company');
+    const api = new Api( id == undefined ? '/company/new' : '/company'  );
     //const api2 = new Api('/company/update');
 
 
@@ -66,7 +66,7 @@ export default function FormCompany({id}) {
                 titularName: titularName,
                 cpf: cpf,
             };
-
+            console.log(12312412431234234)
             // setApi(new Api('/company/update'));
             api.salvar(compania)
                 .then(res => router.push('/'))

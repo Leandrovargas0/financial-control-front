@@ -25,7 +25,7 @@ export class Api {
     async salvar(dados) {
         try {
             if (dados.id === undefined) {
-                return await this.baseApi.post('/', { ...dados });
+                return await this.baseApi.post('', { ...dados });
             } else {
                // return await this.baseApi.put(('/u' +dados.id ), { ...dados });
 
