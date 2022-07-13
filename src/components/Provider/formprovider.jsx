@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Api } from '../../services/api';
 
-export default function FormCompany({id}) {
+export default function FormProvider({id}) {
    
     const [nome, setCorporateName] = useState("");
     const [cnpj, setCnpj] = useState("");
@@ -12,16 +12,11 @@ export default function FormCompany({id}) {
     const [zipCode, setZipCode] = useState("");
     const [phone, setPhone] = useState("");
     const [mail, setMail] = useState("");
-    const [titularName, setTitularName] = useState("");
-    const [cpf, setCpf] = useState("");
 
     const [erro, setErro] = useState(false);
-    //const [api, setApi] = useState(new Api('/company/'));
 
     const router = useRouter();
-    const api = new Api( id == undefined ? '/company/new' : '/company'  );
-    //const api2 = new Api('/company/update');
-
+    const api = new Api( id == undefined ? '/provider/new' : '/provider'  );
 
     useEffect(() => {
         try {
@@ -44,15 +39,12 @@ export default function FormCompany({id}) {
         setZipCode(res.data['zipCode']);
         setPhone(res.data['phone']);
         setMail(res.data['mail']);
-        setTitularName(res.data['titularName']);
-        setCpf(res.data['cpf']);
-        
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            const compania = {
+            const _provider = {
                 id: id,
                 corporateName: nome,
                 cnpj: cnpj,
@@ -61,10 +53,8 @@ export default function FormCompany({id}) {
                 zipCode: zipCode,
                 phone: phone,
                 mail: mail,
-                titularName: titularName,
-                cpf: cpf,
             };
-            api.salvar(compania)
+            api.salvar(_provider)
                 .then(res => router.push('/'))
                 .catch(err => {
                     if (err.response?.data) {
@@ -76,7 +66,7 @@ export default function FormCompany({id}) {
                     }
                 });
         } catch (error) {
-            setErro("Erro ao salvar Disciplina!");
+            setErro("Erro ao salvar Fornecedor!");
         }
     };
 
@@ -85,13 +75,13 @@ export default function FormCompany({id}) {
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="nome">
                 <Form.Label>Nome</Form.Label>
-                <Form.Control name="nome" placeholder="Entre com o nome da empresa"
+                <Form.Control name="nome" placeholder="Nome (Fornecedor)"
                     required defaultValue={nome}
                     onChange={(e) => setCorporateName(e.target.value)}
                 />
 
-                <Form.Label>CNPJ</Form.Label>
-                <Form.Control name="cnpj" placeholder="CNPJ da empresa"
+                <Form.Label>CNPJ/CPF</Form.Label>
+                <Form.Control name="cnpj" placeholder="CNPJ/CPF"
                     required defaultValue={cnpj}
                     onChange={(e) => setCnpj(e.target.value)}
                 />
@@ -123,16 +113,7 @@ export default function FormCompany({id}) {
                     required defaultValue={mail}
                     onChange={(e) => setMail(e.target.value)}
                 />
-                <Form.Label>Nome do Representante</Form.Label>
-                <Form.Control name="titularName" placeholder="Responsável pela empresa"
-                    required defaultValue={titularName}
-                    onChange={(e) => setTitularName(e.target.value)}
-                />
-                <Form.Label>CPF do Representante</Form.Label>
-                <Form.Control name="cpf" placeholder="CPF do responsável"
-                    required defaultValue={cpf}
-                    onChange={(e) => setCpf(e.target.value)}
-                />
+           
 
 
             </Form.Group>
@@ -154,7 +135,7 @@ export default function FormCompany({id}) {
 }
 
 
-FormCompany.defaultProps = {
+FormProvider.defaultProps = {
     id: undefined
 };
 

@@ -27,7 +27,7 @@ export class Api {
             if (dados.id === undefined) {
                 return await this.baseApi.post('', { ...dados });
             } else {
-               // return await this.baseApi.put(('/u' +dados.id ), { ...dados });
+                // return await this.baseApi.put(('/u' +dados.id ), { ...dados });
 
                 return await this.baseApi.put('/update', { ...dados });
             }
@@ -38,7 +38,7 @@ export class Api {
 
     async remover(id) {
         try {
-            return await this.baseApi.delete(`/${id}`);
+            return await this.baseApi.delete(`/delete/${id}`);
         } catch (error) {
             return Promise.reject(error);
         }

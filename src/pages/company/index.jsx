@@ -4,8 +4,6 @@ import Layout from '../../components/Layout/layout';
 
 import Companies from '../../components/Company/listagem';
 
-
-
 export default function companyindex() {
     return <Layout title="Empresa Cadastradas">
         <Row className="float-right row pb-2 pr-5">

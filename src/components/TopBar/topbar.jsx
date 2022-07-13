@@ -22,6 +22,8 @@ export default function TopBar() {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/company">Company</Nav.Link>
+                    <Nav.Link href="/bankaccount">Account</Nav.Link>
+                    <Nav.Link href="/provider">Providers</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
