@@ -13,7 +13,7 @@ export default function FormBankAccount({ id }) {
     const [inicialBalance, setinicialBalance] = useState("");
     const [bank, setbank] = useState("");
     const [cnpjCompany, setCnpjCompany] = useState("");
-
+    
     const [companies, setCompanies] = useState([]);
 
     const [erro, setErro] = useState(false);
@@ -23,8 +23,6 @@ export default function FormBankAccount({ id }) {
     const api2 = new Api('/company');
 
     useEffect(() => {
-
-
         try {
             api2.listar()
                 .then((res) => setCompanies(res.data))
@@ -63,6 +61,7 @@ export default function FormBankAccount({ id }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
+
             const _bankAccount = {
                 id: id,
                 classification: classification,
@@ -136,9 +135,15 @@ export default function FormBankAccount({ id }) {
 
                 <Form.Label>CNPJ da empresa</Form.Label>
                 <br/>
-                <Form.Select  size="lg" onChange={(e) => setCompanySelected(e)}>
+                <Form.Select defaultValue={"Selecione"} size="lg" onChange={(e) => setCompanySelected(e)}>
+
+                    <option value="Selecione">Selecione</option>
                     {companies.map((comp) => (
-                        <option key={comp.id} value={comp.cnpj}>{comp.corporateName} - {comp.cnpj}</option>
+                        <option selected={comp.cnpj == cnpjCompany }
+                            key={comp.id} 
+                        value={comp.cnpj}> {comp.corporateName} - {comp.cnpj}
+                        
+                        </option>
                     ))}
 
                 </Form.Select>
