@@ -61,7 +61,7 @@ export default function FormCompany({id}) {
                 cpf: cpf,
             };
             api.salvar(compania)
-                .then(res => router.push('/'))
+                .then(res => router.push('/company'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";
@@ -131,7 +131,7 @@ export default function FormCompany({id}) {
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/Provider')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/company')}>
                         Cancelar
                     </Button>
                 </Col>

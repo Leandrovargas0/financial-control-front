@@ -55,7 +55,7 @@ export default function FormProvider({id}) {
                 mail: mail,
             };
             api.salvar(_provider)
-                .then(res => router.push('/'))
+                .then(res => router.push('/provider'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";
@@ -120,7 +120,7 @@ export default function FormProvider({id}) {
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/disciplinas')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/provider')}>
                         Cancelar
                     </Button>
                 </Col>

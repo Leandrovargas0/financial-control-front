@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Api } from '../../services/api';
 
-export default function FormBankAccount({id}) {
+export default function FormBankAccount({ id }) {
 
     const [classification, setclassification] = useState("");
     const [description, setdescription] = useState("");
@@ -12,15 +12,27 @@ export default function FormBankAccount({id}) {
     const [inicialBalanceDate, setinicialBalanceDate] = useState("");
     const [inicialBalance, setinicialBalance] = useState("");
     const [bank, setbank] = useState("");
+    const [cnpjCompany, setCnpjCompany] = useState("");
 
+    const [companies, setCompanies] = useState([]);
 
     const [erro, setErro] = useState(false);
 
     const router = useRouter();
     const api = new Api(id == undefined ? '/bank-account/new' : '/bank-account');
-
+    const api2 = new Api('/company');
 
     useEffect(() => {
+
+
+        try {
+            api2.listar()
+                .then((res) => setCompanies(res.data))
+                .catch(err => setErro("Erro ao recuperar entidade!"));
+        }
+        catch (erro) {
+        }
+
         try {
             if (id != undefined) {
                 api.listar(id)
@@ -32,10 +44,7 @@ export default function FormBankAccount({id}) {
         }
     }, [id]);
 
-
     const setCamposJson = (res) => {
-alert(res.data['bank']);
-
         setclassification(res.data['classification']);
         setdescription(res.data['description']);
         setaccountNumber(res.data['accountNumber']);
@@ -43,8 +52,14 @@ alert(res.data['bank']);
         setinicialBalance(res.data['inicialBalance']);
         setbank(res.data['bank']);
         setinicialBalanceDate(res.data['inicialBalanceDate']);
-    }
+        setCnpjCompany(res.data['cnpjCompany']);
 
+    }
+    const setCompanySelected = (e) => {
+        e.preventDefault();
+        setCnpjCompany(e.target.value);
+    }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
@@ -57,10 +72,11 @@ alert(res.data['bank']);
                 inicialBalanceDate: inicialBalanceDate,
                 inicialBalance: inicialBalance,
                 bank: bank,
+                cnpjCompany: cnpjCompany
             };
 
             api.salvar(_bankAccount)
-                .then(res => router.push('/'))
+                .then(res => router.push('/bankaccount'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";
@@ -117,11 +133,22 @@ alert(res.data['bank']);
                     required defaultValue={bank}
                     onChange={(e) => setbank(e.target.value)}
                 />
+
+                <Form.Label>CNPJ da empresa</Form.Label>
+                <br/>
+                <Form.Select  size="lg" onChange={(e) => setCompanySelected(e)}>
+                    {companies.map((comp) => (
+                        <option key={comp.id} value={comp.cnpj}>{comp.corporateName} - {comp.cnpj}</option>
+                    ))}
+
+                </Form.Select>
+
+
             </Form.Group>
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/disciplinas')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/bankaccount')}>
                         Cancelar
                     </Button>
                 </Col>

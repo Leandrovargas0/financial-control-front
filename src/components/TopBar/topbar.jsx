@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Navbar, Nav} from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { useEffect, useState } from "react";
 import isAuthenticated from '../../services/isAuthenticated';
 
@@ -14,18 +14,30 @@ export default function TopBar() {
     }
     setMontar(auth);
   });
-  return (montar && 
+  return (montar &&
     <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="/"></Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/company">Company</Nav.Link>
-                    <Nav.Link href="/bankaccount">Account</Nav.Link>
-                    <Nav.Link href="/provider">Providers</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-    );
+      <Navbar.Brand href="/"></Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link href="/">Home</Nav.Link>
+
+          <NavDropdown title="Cadastros" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/company">Empresas (Company)</NavDropdown.Item>
+            <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
+            <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
+
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/login">
+              Sair
+            </NavDropdown.Item>
+          </NavDropdown>
+
+
+
+
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
 }
