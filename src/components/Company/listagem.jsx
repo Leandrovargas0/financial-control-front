@@ -34,7 +34,7 @@ export default function Companies({ mostrar }) {
   return <Table striped bordered hover>
     <thead>
       <tr>
-        <td>Id</td>
+        <td>CNPJ</td>
         <td>Nome</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>

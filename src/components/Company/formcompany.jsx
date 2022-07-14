@@ -6,7 +6,7 @@ import { Api } from '../../services/api';
 export default function FormCompany({id}) {
    
     const [nome, setCorporateName] = useState("");
-    const [cnpj, setCnpj] = useState("");
+    const [cnpjCpf, setCpfCnpj] = useState("");
     const [address, setAddress] = useState("");
     const [county, setCounty] = useState("");
     const [zipCode, setZipCode] = useState("");
@@ -16,12 +16,9 @@ export default function FormCompany({id}) {
     const [cpf, setCpf] = useState("");
 
     const [erro, setErro] = useState(false);
-    //const [api, setApi] = useState(new Api('/company/'));
-
     const router = useRouter();
-    const api = new Api( id == undefined ? '/company/new' : '/company'  );
-    //const api2 = new Api('/company/update');
-
+    
+    const api = new Api( id == undefined ? '/provider/new' : '/provider'  );
 
     useEffect(() => {
         try {
@@ -38,7 +35,7 @@ export default function FormCompany({id}) {
 
     const setCamposJson = (res) => {
         setCorporateName(res.data['corporateName']);
-        setCnpj(res.data['cnpj']);
+        setCnpj(res.data['cnpjCpf']);
         setAddress(res.data['address']);
         setCounty(res.data['county']);
         setZipCode(res.data['zipCode']);
@@ -46,7 +43,6 @@ export default function FormCompany({id}) {
         setMail(res.data['mail']);
         setTitularName(res.data['titularName']);
         setCpf(res.data['cpf']);
-        
     }
 
     const handleSubmit = (e) => {
@@ -55,7 +51,7 @@ export default function FormCompany({id}) {
             const compania = {
                 id: id,
                 corporateName: nome,
-                cnpj: cnpj,
+                cnpjCpf: cnpjCpf,
                 address: address,
                 county: county,
                 zipCode: zipCode,
@@ -90,18 +86,16 @@ export default function FormCompany({id}) {
                     onChange={(e) => setCorporateName(e.target.value)}
                 />
 
-                <Form.Label>CNPJ</Form.Label>
+                <Form.Label>CNPJ/CPF</Form.Label>
                 <Form.Control name="cnpj" placeholder="CNPJ da empresa"
-                    required defaultValue={cnpj}
-                    onChange={(e) => setCnpj(e.target.value)}
+                    required defaultValue={cnpjCpf}
+                    onChange={(e) => setCpfCnpj(e.target.value)}
                 />
                 <Form.Label>Endereço</Form.Label>
                 <Form.Control name="address" placeholder="Endereço da empresa"
                     required defaultValue={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
-
-
 
                 <Form.Label>Cidade</Form.Label>
                 <Form.Control name="county" placeholder="Cidade"
@@ -133,13 +127,11 @@ export default function FormCompany({id}) {
                     required defaultValue={cpf}
                     onChange={(e) => setCpf(e.target.value)}
                 />
-
-
             </Form.Group>
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/disciplinas')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/Provider')}>
                         Cancelar
                     </Button>
                 </Col>
@@ -152,7 +144,6 @@ export default function FormCompany({id}) {
         </Form>
     </Container>;
 }
-
 
 FormCompany.defaultProps = {
     id: undefined

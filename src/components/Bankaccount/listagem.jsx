@@ -37,7 +37,7 @@ export default function BankAccounts({ mostrar }) {
       <tr>
         <td>Agência</td>
         <td>Conta</td>
-        <td>Código Banco</td>
+        <td>Banco</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
@@ -46,7 +46,7 @@ export default function BankAccounts({ mostrar }) {
         <tr key={comp.id}>
           <td>{comp.agencyNumber}</td>
           <td>{comp.accountNumber}</td>
-          <td>{comp.bank}</td>
+          <td>{comp.description}</td>
 
           {mostrar && <td><Button variant="info" href={"bankaccount/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
           </td>}

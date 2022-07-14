@@ -7,9 +7,9 @@ import Providers from '../../components/Provider/listagem';
 
 
 export default function providerindex() {
-    return <Layout title="Empresa Cadastradas">
+    return <Layout title="fornecedores Cadastrados">
         <Row className="float-right row pb-2 pr-5">
-            <Button variant="primary" href="/provider/add">Nova Empresa</Button>
+            <Button variant="primary" href="/provider/add">Novo fornecedor</Button>
         </Row>
         <Providers mostrar={true}></Providers>
     </Layout>;
