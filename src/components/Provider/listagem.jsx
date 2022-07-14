@@ -36,15 +36,15 @@ export default function Providers({ mostrar }) {
   return <Table striped bordered hover>
     <thead>
       <tr>
-        <td>Id</td>
-        <td>Nome</td>
+        <td>CNPJ/CPF</td>
+        <td>Fornecedor</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
     <tbody>
       {company?.map((comp) => (
         <tr key={comp.id}>
-          <td>{comp.cnpj}</td>
+          <td>{comp.cnpjCpf}</td>
           <td>{comp.corporateName}</td>
           {mostrar && <td><Button variant="info" href={"provider/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
           </td>}
