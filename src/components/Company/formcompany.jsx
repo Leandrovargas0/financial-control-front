@@ -6,7 +6,7 @@ import { Api } from '../../services/api';
 export default function FormCompany({id}) {
    
     const [nome, setCorporateName] = useState("");
-    const [cnpjCpf, setCpfCnpj] = useState("");
+    const [cnpj, setCnpj] = useState("");
     const [address, setAddress] = useState("");
     const [county, setCounty] = useState("");
     const [zipCode, setZipCode] = useState("");
@@ -18,7 +18,7 @@ export default function FormCompany({id}) {
     const [erro, setErro] = useState(false);
     const router = useRouter();
     
-    const api = new Api( id == undefined ? '/provider/new' : '/provider'  );
+    const api = new Api( id == undefined ? '/company/new' : '/company'  );
 
     useEffect(() => {
         try {
@@ -35,7 +35,7 @@ export default function FormCompany({id}) {
 
     const setCamposJson = (res) => {
         setCorporateName(res.data['corporateName']);
-        setCnpj(res.data['cnpjCpf']);
+        setCnpj(res.data['cnpj']);
         setAddress(res.data['address']);
         setCounty(res.data['county']);
         setZipCode(res.data['zipCode']);
@@ -88,8 +88,8 @@ export default function FormCompany({id}) {
 
                 <Form.Label>CNPJ/CPF</Form.Label>
                 <Form.Control name="cnpj" placeholder="CNPJ da empresa"
-                    required defaultValue={cnpjCpf}
-                    onChange={(e) => setCpfCnpj(e.target.value)}
+                    required defaultValue={cnpj}
+                    onChange={(e) => setCnpj(e.target.value)}
                 />
                 <Form.Label>Endereço</Form.Label>
                 <Form.Control name="address" placeholder="Endereço da empresa"
@@ -117,6 +117,9 @@ export default function FormCompany({id}) {
                     required defaultValue={mail}
                     onChange={(e) => setMail(e.target.value)}
                 />
+
+
+
                 <Form.Label>Nome do Representante</Form.Label>
                 <Form.Control name="titularName" placeholder="Responsável pela empresa"
                     required defaultValue={titularName}

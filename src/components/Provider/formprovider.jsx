@@ -6,7 +6,7 @@ import { Api } from '../../services/api';
 export default function FormProvider({id}) {
    
     const [nome, setCorporateName] = useState("");
-    const [cnpj, setCnpj] = useState("");
+    const [cnpjCpf, setCnpjCpf] = useState("");
     const [address, setAddress] = useState("");
     const [county, setCounty] = useState("");
     const [zipCode, setZipCode] = useState("");
@@ -33,7 +33,7 @@ export default function FormProvider({id}) {
 
     const setCamposJson = (res) => {
         setCorporateName(res.data['corporateName']);
-        setCnpj(res.data['cnpj']);
+        setCnpjCpf(res.data['cnpjCpf']);
         setAddress(res.data['address']);
         setCounty(res.data['county']);
         setZipCode(res.data['zipCode']);
@@ -44,17 +44,20 @@ export default function FormProvider({id}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
-            const _provider = {
+            const fornecedor = {
                 id: id,
                 corporateName: nome,
-                cnpj: cnpj,
+                cnpjCpf: cnpjCpf,
                 address: address,
                 county: county,
                 zipCode: zipCode,
                 phone: phone,
                 mail: mail,
             };
-            api.salvar(_provider)
+
+            console.log(fornecedor);
+
+            api.salvar(fornecedor)
                 .then(res => router.push('/provider'))
                 .catch(err => {
                     if (err.response?.data) {
@@ -82,8 +85,8 @@ export default function FormProvider({id}) {
 
                 <Form.Label>CNPJ/CPF</Form.Label>
                 <Form.Control name="cnpj" placeholder="CNPJ/CPF"
-                    required defaultValue={cnpj}
-                    onChange={(e) => setCnpj(e.target.value)}
+                    required defaultValue={cnpjCpf}
+                    onChange={(e) => setCnpjCpf(e.target.value)}
                 />
                 <Form.Label>Endereço</Form.Label>
                 <Form.Control name="address" placeholder="Endereço da empresa"

@@ -25,6 +25,7 @@ export default function TopBar() {
           <NavDropdown title="Cadastros" id="basic-nav-dropdown">
             <NavDropdown.Item href="/company">Empresas (Company)</NavDropdown.Item>
             <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
+            <NavDropdown.Item href="/accountchart">Planos de Contas (Account Chart)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
 
             <NavDropdown.Divider />
