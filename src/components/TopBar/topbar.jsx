@@ -28,6 +28,8 @@ export default function TopBar() {
             <NavDropdown.Item href="/accountchart">Planos de Contas (Account Chart)</NavDropdown.Item>
             <NavDropdown.Item href="/paymentform">Forma de Pagamento (Payment Form)</NavDropdown.Item>
 
+
+            <NavDropdown.Item href="/customer">Clientes (Customers)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
 
             <NavDropdown.Divider />
