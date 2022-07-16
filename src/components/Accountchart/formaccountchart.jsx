@@ -128,7 +128,7 @@ export default function FormAccountChart({ id }) {
             };
 
             api.salvar(_bankAccount)
-                .then(res => router.push('/bankaccount'))
+                .then(res => router.push('/account-chart'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";

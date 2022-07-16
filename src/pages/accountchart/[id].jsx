@@ -16,7 +16,7 @@ export default function EditAccountChart() {
 
     useEffect(() => getAndSetIdCompany());
 
-    return <Layout title={"Editar Conta Bancária"}>
+    return <Layout title={"Editar Plano de Contas"}>
         <FormAccountChart id={id}></FormAccountChart>
     </Layout>
 }

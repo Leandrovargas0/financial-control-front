@@ -5,7 +5,7 @@ import Layout from '../../components/Layout/layout';
 import FormAccountChart from '../../components/Accountchart/formaccountchart';
 
 export default function AddAccountChart() {
-    return <Layout title="Dados da Conta Bancária">
+    return <Layout title="Novo Plano de Contas">
         <FormAccountChart></FormAccountChart>
     </Layout>;
 }
