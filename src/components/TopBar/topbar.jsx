@@ -31,13 +31,20 @@ export default function TopBar() {
 
             <NavDropdown.Item href="/customer">Clientes (Customers)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
-
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
               Sair
             </NavDropdown.Item>
           </NavDropdown>
 
+
+          <NavDropdown title="Movimentos" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/entrypay">Recibos de Pagamento</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/login">
+              Sair
+            </NavDropdown.Item>
+          </NavDropdown>
 
 
 

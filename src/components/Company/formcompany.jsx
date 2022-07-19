@@ -51,7 +51,7 @@ export default function FormCompany({id}) {
             const compania = {
                 id: id,
                 corporateName: nome,
-                cnpjCpf: cnpjCpf,
+                cnpj: cnpj,
                 address: address,
                 county: county,
                 zipCode: zipCode,
@@ -72,7 +72,7 @@ export default function FormCompany({id}) {
                     }
                 });
         } catch (error) {
-            setErro("Erro ao salvar Disciplina!");
+            setErro("Erro ao salvar Empresa!");
         }
     };
 
