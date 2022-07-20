@@ -8,9 +8,8 @@ export default function FormAccountChart({ id }) {
     const [classification, setclassification] = useState("");
     const [accountType, setaccountType] = useState("");
     const [description, setdescription] = useState("");
-    const [bank, setbank] = useState("");
-    const [resourceEntry, setresourceEntry] = useState("");
-    const [resourceDeparture, setresourceDeparture] = useState("");
+    const [aspect, setaspect] = useState("");
+
     const [bankAccount, setbankAccount] = useState("");
 
     const [contascadastradas, setcontascadastradas] = useState([]);
@@ -41,13 +40,12 @@ export default function FormAccountChart({ id }) {
     }, [id]);
 
     const setCamposJson = (res) => {
+        console.log(res.data);
         setclassification(res.data['classification']);
         setaccountType(res.data['accountType']);
         setdescription(res.data['description']);
-        setbank(res.data['bank']);
-        setresourceEntry(res.data['resourceEntry']);
-        setresourceDeparture(res.data['resourceDeparture']);
-        setbankAccount(res.data['bankAccount']);
+        setaspect(res.data['aspect']);
+        setbankAccount(res.data['bankAccount']['id']);
     }
 
     const setAccountbankSelected = (e) => {
@@ -62,68 +60,34 @@ export default function FormAccountChart({ id }) {
 
     const setFeature = (e) => {
         e.preventDefault();
-        setbank(e.target.value);
+        setaspect(e.target.value);
     }
 
-    const setInputOutput = (e) => {
-        e.preventDefault();
-        if (e.target.value == "entrada") {
-            setresourceEntry("true");
-            setresourceDeparture("false")
-        }
-        else {
-            setresourceEntry("false");
-            setresourceDeparture("true")
-        }
-    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-
-            
-            if (bankAccount = "") {
-                alert(bankAccount);
+        try { 
+            if (bankAccount == "") {
                 if (contascadastradas != []) {
                     setbankAccount(contascadastradas[0]["id"]);
                 }
-            }
-
-            if (resourceEntry == "") {
-                setresourceEntry("1900-01-01");
-
-            }
-
-            if (resourceDeparture == "") {
-                setresourceDeparture("1900-01-01");
             }
 
             if (accountType == "") {
                 setaccountType("Analítico");
             }
 
-            if (bank == "") {
-                setbank("1");
-            }
+        
 
             const _bankAccount = {
                 id: id,
                 classification: classification,
                 accountType: accountType,
                 description: description,
-                bank: bank,
-                resourceEntry: resourceEntry,
-                resourceDeparture: resourceDeparture,
+                aspect: aspect,
                 bankAccount: {
                     id: bankAccount,
-                    classification: "",
-                    description: "",
-                    accountNumber: "",
-                    agencyNumber: "",
-                    inicialBalanceDate: "",
-                    inicialBalance: "",
-                    bank: "",
-                    cnpjCompany: ""
                 }
             };
 
@@ -162,7 +126,7 @@ export default function FormAccountChart({ id }) {
                 <br />
 
                 <Form.Label>Descrição</Form.Label>
-                <Form.Control name="description" placeholder="Descrição"
+                <Form.Control name="description" placeholder="Ex: Ativo, passivo, patrimônio líquido..."
                     required defaultValue={description}
                     onChange={(e) => setdescription(e.target.value)}
                 />
@@ -170,39 +134,15 @@ export default function FormAccountChart({ id }) {
 
                 <Form.Label>Característica da Conta</Form.Label>
                 <br />
-                <Form.Select defaultValue={"Caixa"} size="lg" onChange={(e) => setFeature(e)}>
-                    <option selected={bank == "1"} value="1">Caixa</option>
-                    <option selected={bank == "2"} value="2">Banco</option>
-                    <option selected={bank == "3"} value="3">Cliente</option>
-                    <option selected={bank == "4"} value="4">Fornecedor</option>
+                <Form.Select defaultValue={"1"} size="lg" onChange={(e) => setFeature(e)}>
+                    <option selected={aspect == "1"} value="1">Caixa</option>
+                    <option selected={aspect == "2"} value="2">Banco</option>
+                    <option selected={aspect == "3"} value="3">Cliente</option>
+                    <option selected={aspect == "4"} value="4">Fornecedor</option>
                 </Form.Select>
                 <br />
 
-
-                { /* 
-                <Form.Label>Entrada/Saída de Recurso</Form.Label>
-                <br />
-                <Form.Select defaultValue={"Entrada"} size="lg" onChange={(e) => setInputOutput(e)}>
-                    <option selected={resourceEntry == "true"} value="entrada">Entrada</option>
-                    <option selected={resourceDeparture == "true"} value="Saida">Saida</option>
-                </Form.Select>
-                <br />
-  */ }
-
-
-
-                <Form.Label>Entrada de Recurso</Form.Label>
-                <Form.Control name="resourceEntry" placeholder="Entrada de Recurso"
-                    required defaultValue={resourceEntry}
-                    onChange={(e) => setresourceEntry(e.target.value)}
-                />
-
-                <Form.Label>Saída de Recurso</Form.Label>
-                <Form.Control name="resourceDeparture" placeholder="Saída de Recurso"
-                    required defaultValue={resourceDeparture}
-                    onChange={(e) => setresourceDeparture(e.target.value)}
-                />
-
+                
                 <Form.Label>Conta Vinculada</Form.Label>
                 <br />
                 <Form.Select defaultValue={"Selecione"} size="lg" onChange={(e) => setAccountbankSelected(e)}>

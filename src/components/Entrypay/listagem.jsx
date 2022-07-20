@@ -38,9 +38,7 @@ export default function Entrypays({ mostrar }) {
         <td>Valor DOC</td>
         <td>Emissão</td>
         <td>Vencimento</td>
-
-
-
+        <td>Cliente/Empresa</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
@@ -51,7 +49,7 @@ export default function Entrypays({ mostrar }) {
           <td>{comp.titleValue}</td>
           <td>{comp.emissionDate}</td>
           <td>{comp.dueDate}</td>
-
+          <td>{comp.customer.corporateName}/{comp.company.corporateName}</td>
           {mostrar && <td><Button variant="info" href={"entrypay/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
           </td>}
         </tr>

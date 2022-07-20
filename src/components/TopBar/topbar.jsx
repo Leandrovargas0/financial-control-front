@@ -27,8 +27,6 @@ export default function TopBar() {
             <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
             <NavDropdown.Item href="/accountchart">Planos de Contas (Account Chart)</NavDropdown.Item>
             <NavDropdown.Item href="/paymentform">Forma de Pagamento (Payment Form)</NavDropdown.Item>
-
-
             <NavDropdown.Item href="/customer">Clientes (Customers)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
             <NavDropdown.Divider />
@@ -39,7 +37,7 @@ export default function TopBar() {
 
 
           <NavDropdown title="Movimentos" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/entrypay">Recibos de Pagamento</NavDropdown.Item>
+            <NavDropdown.Item href="/entrypay">Contas a Receber</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
               Sair
