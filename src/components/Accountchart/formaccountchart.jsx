@@ -103,7 +103,7 @@ export default function FormAccountChart({ id }) {
                     }
                 });
         } catch (error) {
-            setErro("Erro ao salvar Conta!");
+            setErro("Erro ao salvar!");
         }
     };
 
@@ -158,7 +158,7 @@ export default function FormAccountChart({ id }) {
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/bankaccount')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/accountchart')}>
                         Cancelar
                     </Button>
                 </Col>

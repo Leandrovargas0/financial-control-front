@@ -41,7 +41,7 @@ export default function TopBar() {
           <NavDropdown title="Movimentos" id="basic-nav-dropdown">
             <NavDropdown.Item href="/entrypay">Contas a Receber</NavDropdown.Item>
             <NavDropdown.Item href="/billstopay">Contas a Pagar</NavDropdown.Item>
-            <NavDropdown.Item href="/inventory">Estoque (Inventory)</NavDropdown.Item>
+            <NavDropdown.Item href="/inventory">Estoque</NavDropdown.Item>
             
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
@@ -49,6 +49,13 @@ export default function TopBar() {
             </NavDropdown.Item>
           </NavDropdown>
 
+          <NavDropdown title="Área Legal" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/tax">Impostos</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/login">
+              Sair
+            </NavDropdown.Item>
+          </NavDropdown>
 
 
         </Nav>

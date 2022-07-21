@@ -94,8 +94,6 @@ export default function FormCustomer({id}) {
                     onChange={(e) => setAddress(e.target.value)}
                 />
 
-
-
                 <Form.Label>Cidade</Form.Label>
                 <Form.Control name="county" placeholder="Cidade"
                     required defaultValue={county}
@@ -123,7 +121,7 @@ export default function FormCustomer({id}) {
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/provider')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/customer')}>
                         Cancelar
                     </Button>
                 </Col>

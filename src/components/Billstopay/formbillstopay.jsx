@@ -50,7 +50,7 @@ export default function FormBillsToPay({ id }) {
 
     const setCamposJson = (res) => {
         setdocNumber(res.data['docNumber']);
-        settitleValue(res.data['titleValue']);
+        settitleValue((res.data['titleValue']).toString().replace(",", "."));
         setdueDate(res.data['dueDate']);
         setemissionDate(res.data['emissionDate']);
         setprovider(res.data['provider']['id']);
@@ -70,13 +70,12 @@ export default function FormBillsToPay({ id }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        settitleValue( titleValue.replace(",", ".") );
 
         try {
             const _entrypay = {
                 id: id,
                 docNumber: docNumber,
-                titleValue: titleValue,
+                titleValue: titleValue.replace(",", "."),
                 dueDate: dueDate,
                 emissionDate: emissionDate,
                 company: {
@@ -88,7 +87,7 @@ export default function FormBillsToPay({ id }) {
             };
 
             api.salvar(_entrypay)
-                .then(res => router.push('/entrypay'))
+                .then(res => router.push('/billstopay'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";
@@ -162,7 +161,8 @@ export default function FormBillsToPay({ id }) {
             </Form.Group>
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/entrypay')}>
+                    <Button variant="outline-secondary" type="button" 
+                    onClick={() => router.push('/billstopay')}>
                         Cancelar
                     </Button>
                 </Col>

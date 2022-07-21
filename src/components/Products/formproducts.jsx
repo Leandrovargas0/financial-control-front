@@ -48,7 +48,7 @@ export default function FormProducts({ id }) {
     }, [id]);
 
     const setCamposJson = (res) => {
-        setvalue(res.data['value']);
+        setvalue((res.data['value']).toString().replace(",", "."));
         setnameProduct(res.data['nameProduct']);
         setdescription(res.data['description']);
         setprovider(res.data['provider']['id']);
@@ -73,7 +73,7 @@ export default function FormProducts({ id }) {
         try {
             const _entrypay = {
                 id: id,
-                value: value,
+                value: value.replace(",", "."),
                 nameProduct: nameProduct,
                 description: description,
                 company: {
@@ -96,7 +96,7 @@ export default function FormProducts({ id }) {
                     }
                 });
         } catch (error) {
-            setErro("Erro ao salvar Conta!");
+            setErro("Erro ao salvar!");
         }
     };
 
@@ -155,7 +155,7 @@ export default function FormProducts({ id }) {
             </Form.Group>
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/entrypay')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/products')}>
                         Cancelar
                     </Button>
                 </Col>

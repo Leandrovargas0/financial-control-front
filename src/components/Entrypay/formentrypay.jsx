@@ -50,7 +50,7 @@ export default function FormEntrypay({ id }) {
 
     const setCamposJson = (res) => {
         setdocNumber(res.data['docNumber']);
-        settitleValue(res.data['titleValue']);
+        settitleValue((res.data['titleValue']).toString().replace(",", "."));
         setdueDate(res.data['dueDate']);
         setemissionDate(res.data['emissionDate']);
 
