@@ -1,0 +1,62 @@
+import { Table, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { Api } from '../../services/api';
+
+export default function Products({ mostrar }) {
+  const [bankaccount, setBankAccount] = useState([]);
+  const router = useRouter();
+  const api = new Api('/products');
+
+  useEffect(() => listar(), []);
+
+  const listar = () => {
+    api.listar()
+      .then(res => {
+        setBankAccount(res.data);
+      })
+      .catch(err => router.push('/login'));
+  };
+
+  const handleDelete = (id) => {
+    if (confirm("Deseja remover este recibo de pagamento?")) {
+      try {
+        api.remover(id)
+          .then(res => listar())
+          .catch(err => alert(err));
+      } catch (error) {
+        alert(error);
+      }
+    }
+  };
+
+
+  return <Table striped bordered hover>
+    <thead>
+      <tr>
+        <td>Produto</td>
+        <td>Preço de Compra</td>
+        <td>Revendedor</td>
+        <td>Fornecedor</td>
+        {mostrar && <td style={{ width: 200 }}>Ações</td>}
+      </tr>
+    </thead>
+    <tbody>
+      {bankaccount?.map((comp) => (
+        <tr key={comp.id}>
+          <td>{comp.nameProduct}</td>
+          <td>{comp.value}</td>
+          <td>{comp.company.corporateName}</td>
+          <td>{comp.provider.corporateName}</td>
+          {mostrar && <td><Button variant="info" href={"products/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
+          </td>}
+        </tr>
+      ))
+      }
+    </tbody>
+  </Table>;
+}
+
+Products.defaultProps = {
+  mostrar: false
+};

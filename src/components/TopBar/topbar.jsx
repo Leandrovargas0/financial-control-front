@@ -29,6 +29,8 @@ export default function TopBar() {
             <NavDropdown.Item href="/paymentform">Forma de Pagamento (Payment Form)</NavDropdown.Item>
             <NavDropdown.Item href="/customer">Clientes (Customers)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
+            <NavDropdown.Item href="/products">Produtos (Products)</NavDropdown.Item>
+
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
               Sair
@@ -38,6 +40,9 @@ export default function TopBar() {
 
           <NavDropdown title="Movimentos" id="basic-nav-dropdown">
             <NavDropdown.Item href="/entrypay">Contas a Receber</NavDropdown.Item>
+            <NavDropdown.Item href="/billstopay">Contas a Pagar</NavDropdown.Item>
+            <NavDropdown.Item href="/inventory">Estoque (Inventory)</NavDropdown.Item>
+            
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
               Sair
