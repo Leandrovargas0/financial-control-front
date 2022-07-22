@@ -71,14 +71,11 @@ export default function FormEntrypay({ id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        settitleValue( titleValue.replace(",", ".") );
-
         try {
             const _entrypay = {
                 id: id,
                 docNumber: docNumber,
-                titleValue: titleValue,
+                titleValue: titleValue.replace(",", ".") ,
                 dueDate: dueDate,
                 emissionDate: emissionDate,
                 company: {

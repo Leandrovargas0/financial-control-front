@@ -24,6 +24,7 @@ export default function AccountCharts({ mostrar }) {
     if (asp == "2") { return "Banco"; }
     if (asp == "3") { return "Cliente"; }
     if (asp == "4") { return "Fornecedor"; }
+    if (asp == "5") { return "Imoveis"; }
   }
 
   const ExibeaccountType = (asp) => {

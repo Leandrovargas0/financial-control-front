@@ -9,7 +9,7 @@ export default function FormSale({ id }) {
     const [emissionDate, setemissionDate] = useState("");
     const [customer, setcustomer] = useState("");
     const [tax, settax] = useState("");
-
+    const [paymentForm, setpaymentForm] = useState("");
 
     const [products, setproducts] = useState("");
     //banco
@@ -18,6 +18,7 @@ export default function FormSale({ id }) {
     const [objproducts, setobjproducts] = useState([]);
 
     //Usados para os selects
+    const [paymentForms, setpaymentForms] = useState([]);
     const [customers, setcustomers] = useState([]);
     const [producties, setproducties] = useState([]);
     const [taxes, settaxes] = useState([]);
@@ -29,6 +30,7 @@ export default function FormSale({ id }) {
     const api2 = new Api('/customer');
     const api3 = new Api('/products');
     const api4 = new Api('/tax');
+    const api5 = new Api('/payment-form');
 
     useEffect(() => {
         try {
@@ -53,6 +55,13 @@ export default function FormSale({ id }) {
         catch (erro) { }
 
         try {
+            api5.listar()
+                .then((res) => setpaymentForms(res.data))
+                .catch(err => setErro("Erro ao recuperar entidade!"));
+        }
+        catch (erro) { }
+
+        try {
             if (id != undefined) {
                 api.listar(id)
                     .then((res) => setCamposJson(res))
@@ -68,6 +77,7 @@ export default function FormSale({ id }) {
         setemissionDate(res.data['emissionDate']);
         settax(res.data['tax']['id']);
         setcustomer(res.data['customer']['id']);
+        setpaymentForm(res.data['paymentForm']['id']);
         setobjproducts(res.data['products']);
     }
 
@@ -92,8 +102,6 @@ export default function FormSale({ id }) {
         </Table>;
     }
 
-
-
     const AddProdutToList = (internalobjproducts) => {
         const addprod = [];
         const tamanho = internalobjproducts.length;
@@ -106,7 +114,6 @@ export default function FormSale({ id }) {
                         if (internalobjproducts[i]["id"] == parseInt(products)) {
                             jainserido = true;
                         }
-
                         addprod.push(
                             { id: internalobjproducts[i]["id"] }
                         )
@@ -138,10 +145,16 @@ export default function FormSale({ id }) {
 
     }
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
+        if ((value == "")
+            ||(emissionDate == "")
+            ||(customer == "" || customer == "0")
+            ||(tax == "" || tax == "0")
+            ||(paymentForm == "" || paymentForm == "0")
+        ) {
+            alert("Preencha todos os campos")
+        }
         try {
             const _entrypay = {
                 id: id,
@@ -153,13 +166,16 @@ export default function FormSale({ id }) {
                 tax: {
                     id: tax
                 },
+                paymentForm: {
+                    id: paymentForm
+                },
                 products: mountobjproducts,
             };
 
             api.salvar(_entrypay)
                 .then(res => {
                     alert("Salvo");
-                    router.push('/sale/'  + id)
+                    router.push('/sale/' + id)
                 })
                 .catch(err => {
                     if (err.response?.data) {
@@ -184,7 +200,7 @@ export default function FormSale({ id }) {
                     required defaultValue={value}
                     onChange={(e) => setvalue(e.target.value)}
                 />
-                <Form.Label>Data de Emissão</Form.Label>
+                <Form.Label>Data de Emissão (AAAA-MM-DD)</Form.Label>
                 <Form.Control name="emissionDate" placeholder="AAAA-MM-DD"
                     required defaultValue={emissionDate}
                     onChange={(e) => setemissionDate(e.target.value)}
@@ -214,6 +230,20 @@ export default function FormSale({ id }) {
                         <option selected={comp.id == tax}
                             key={comp.id}
                             value={comp.id}> {comp.nameTax} - {comp.scope} -  {comp.percent}%
+                        </option>
+                    ))}
+                </Form.Select>
+
+                <br />
+                <Form.Label>Forma de Pagamento</Form.Label>
+                <br />
+                <Form.Select defaultValue={"0"} size="lg"
+                    onChange={(e) => setpaymentForm(e.target.value)}>
+                    <option value="0">Selecione</option>
+                    {paymentForms.map((comp) => (
+                        <option selected={comp.id == paymentForm}
+                            key={comp.id}
+                            value={comp.id}> {comp.description}
                         </option>
                     ))}
                 </Form.Select>

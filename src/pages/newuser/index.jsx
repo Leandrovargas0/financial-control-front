@@ -27,11 +27,12 @@ export default function Login() {
                     body: JSON.stringify({ username: username, password: password, name: completeName })
                 };
                 fetch('http://localhost:8080/login', parametros)
-                    .then((res) => res.json())
                     .then((res) => {
-                        router.push('/login');
+                        alert("Cadastrado")
+                        router.push('/login')
                     })
-                    .catch((e) => alert("Usuário ou senha incorretos."));
+
+                    .catch((e) => alert("Erro ao cadastrar."));
             } catch (err) {
                 setErro(<Alert variant="danger">{err}</Alert>);
             }

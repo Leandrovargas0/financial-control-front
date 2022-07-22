@@ -139,6 +139,7 @@ export default function FormAccountChart({ id }) {
                     <option selected={aspect == "2"} value="2">Banco</option>
                     <option selected={aspect == "3"} value="3">Cliente</option>
                     <option selected={aspect == "4"} value="4">Fornecedor</option>
+                    <option selected={aspect == "5"} value="5">Imóveis/Moveis</option>
                 </Form.Select>
                 <br />
 

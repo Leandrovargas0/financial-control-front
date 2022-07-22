@@ -42,6 +42,8 @@ export default function TopBar() {
             <NavDropdown.Item href="/entrypay">Contas a Receber</NavDropdown.Item>
             <NavDropdown.Item href="/billstopay">Contas a Pagar</NavDropdown.Item>
             <NavDropdown.Item href="/inventory">Estoque</NavDropdown.Item>
+            <NavDropdown.Item href="/patrimony">Patrimônio</NavDropdown.Item>
+            <NavDropdown.Item href="/bankdeposit">Movimentação (Banco)</NavDropdown.Item>
             
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
