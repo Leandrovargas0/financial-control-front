@@ -57,6 +57,9 @@ export default function TopBar() {
             </NavDropdown.Item>
           </NavDropdown>
 
+          <Nav className="mr-auto">
+          <Nav.Link href="/sale">Vendas</Nav.Link>
+        </Nav>
 
         </Nav>
       </Navbar.Collapse>

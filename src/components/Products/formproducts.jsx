@@ -68,8 +68,6 @@ export default function FormProducts({ id }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setvalue(value.replace(",", "."));
-
         try {
             const _entrypay = {
                 id: id,
