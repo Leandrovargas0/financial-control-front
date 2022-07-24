@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout/layout";
-import FormFunds from '../../components/Funds/formfunds';
+import FormProfessions from '../../components/Professions/formprofessions';
 import { useRouter } from "next/router";
 
 import React, { useState, useEffect } from 'react';

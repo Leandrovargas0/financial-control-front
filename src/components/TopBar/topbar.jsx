@@ -46,6 +46,8 @@ export default function TopBar() {
             <NavDropdown.Item href="/personaldata">Dados Pessoais</NavDropdown.Item>
             <NavDropdown.Item href="/professions">Cargos</NavDropdown.Item>
             <NavDropdown.Item href="/funds">Verbas</NavDropdown.Item>
+            <NavDropdown.Item href="/healthplan">Planos de Saúde</NavDropdown.Item>
+            <NavDropdown.Item href="/employee">Funcionários</NavDropdown.Item>
 
 
             <NavDropdown.Divider />

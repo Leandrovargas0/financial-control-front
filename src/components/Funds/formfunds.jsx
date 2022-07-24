@@ -32,15 +32,16 @@ export default function FormFunds({ id }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+      
         try {
 
-            const _professions = {
+            const _funds = {
                 id: id,
                 name: name,
                 provento: provento,
             };
 
-            api.salvar(_professions)
+            api.salvar(_funds)
                 .then(res => router.push('/funds'))
                 .catch(err => {
                     if (err.response?.data) {
@@ -65,12 +66,14 @@ export default function FormFunds({ id }) {
                     required defaultValue={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <Form.Label>Provento</Form.Label>
+                <Form.Label>1 - PROVENTO | 2-DESCONTO</Form.Label>
              
-                <Form.Control name="provento" placeholder="220"
+                <Form.Control name="provento" placeholder="1|2"
                     required defaultValue={provento}
                     onChange={(e) => setProvento(e.target.value)}
                 />
+
+
             </Form.Group>
 
             <Row className="justify-content-end mt-3">
