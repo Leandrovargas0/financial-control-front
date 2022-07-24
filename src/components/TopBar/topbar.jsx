@@ -48,7 +48,7 @@ export default function TopBar() {
             <NavDropdown.Item href="/funds">Verbas</NavDropdown.Item>
             <NavDropdown.Item href="/healthplan">Planos de Saúde</NavDropdown.Item>
             <NavDropdown.Item href="/employee">Funcionários</NavDropdown.Item>
-            <NavDropdown.Item href="/bankaccountemployee">Funcionários</NavDropdown.Item>
+            <NavDropdown.Item href="/bankaccountemployee">Contas Bancárias (Funcionários)</NavDropdown.Item>
 
 
             <NavDropdown.Divider />
@@ -72,6 +72,7 @@ export default function TopBar() {
           </NavDropdown>
 
           <NavDropdown title="Área Legal" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/law">Leis</NavDropdown.Item>
             <NavDropdown.Item href="/tax">Impostos</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">

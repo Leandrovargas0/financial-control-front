@@ -3,29 +3,38 @@ import { useEffect, useState } from 'react';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Api } from '../../services/api';
 
-export default function FormBankAccount({ id }) {
+export default function FormBankAccountEmployee({ id }) {
 
-    const [classification, setclassification] = useState("");
-    const [description, setdescription] = useState("");
-    const [accountNumber, setaccountNumber] = useState("");
-    const [agencyNumber, setagencyNumber] = useState("");
-    const [inicialBalanceDate, setinicialBalanceDate] = useState("");
-    const [inicialBalance, setinicialBalance] = useState("");
-    const [bank, setbank] = useState("");
-    const [cnpjCompany, setCnpjCompany] = useState("");
-    
-    const [companies, setCompanies] = useState([]);
+    const [bank, setBank] = useState("");
+    const [employee, setEmployee] = useState("");
+    const [conta, setConta] = useState("");
+    const [agencia, setAgencia] = useState("");
+    const [dvAgencia, setDvAgencia] = useState("");
+    const [dvConta, setdvConta] = useState("");
+
+    const [banks, setBanks] = useState([]);
+    const [employees, setEmployees] = useState([]);
 
     const [erro, setErro] = useState(false);
 
     const router = useRouter();
-    const api = new Api(id == undefined ? '/bank-account/new' : '/bank-account');
-    const api2 = new Api('/company');
+    const api = new Api(id == undefined ? '/bankaccountemployee/new' : '/bankaccountemployee');
+    const api2 = new Api('/bank');
+    const api3 = new Api('/employee');
+    
 
     useEffect(() => {
         try {
             api2.listar()
-                .then((res) => setCompanies(res.data))
+                .then((res) => setBanks(res.data))
+                .catch(err => setErro("Erro ao recuperar entidade!"));
+        }
+        catch (erro) {
+        }
+
+        try {
+            api3.listar()
+                .then((res) => setEmployees(res.data))
                 .catch(err => setErro("Erro ao recuperar entidade!"));
         }
         catch (erro) {
@@ -42,40 +51,47 @@ export default function FormBankAccount({ id }) {
         }
     }, [id]);
 
-    const setCamposJson = (res) => {
-        setclassification(res.data['classification']);
-        setdescription(res.data['description']);
-        setaccountNumber(res.data['accountNumber']);
-        setagencyNumber(res.data['agencyNumber']);
-        setinicialBalance(res.data['inicialBalance']);
-        setbank(res.data['bank']);
-        setinicialBalanceDate(res.data['inicialBalanceDate']);
-        setCnpjCompany(res.data['cnpjCompany']);
-
-    }
-    const setCompanySelected = (e) => {
-        e.preventDefault();
-        setCnpjCompany(e.target.value);
-    }
     
+    const setCamposJson = (res) => {
+        setBank(res.data['bank']['id']);
+        setEmployee(res.data['employee']['id']);
+        setConta(res.data['conta']);
+        setAgencia(res.data['agencia']);
+        setDvAgencia(res.data['dvAgencia']);
+        setdvConta(res.data['dvConta']);
+    }
+
+
+    // const [bank, setBank] = useState("");
+    // const [employee, setEmployee] = useState("");
+    // const [conta, setConta] = useState("");
+    // const [agencia, setAgencia] = useState("");
+    // const [dvAgencia, setDvAgencia] = useState("");
+    // const [dvConta, setdvConta] = useState("");
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         try {
 
-            const _bankAccount = {
+            const _bankAccountEmployee = {
                 id: id,
-                classification: classification,
-                description: description,
-                accountNumber: accountNumber,
-                agencyNumber: agencyNumber,
-                inicialBalanceDate: inicialBalanceDate,
-                inicialBalance: inicialBalance,
-                bank: bank,
-                cnpjCompany: cnpjCompany
-            };
+                bank: {
+                    id: bank
+                },
+                employee: {
+                    id: employee
+                },
+                conta: conta,
 
-            api.salvar(_bankAccount)
-                .then(res => router.push('/bankaccount'))
+                agencia: agencia,
+                dvAgencia: dvAgencia,
+                dvConta:  dvConta
+
+            };
+           
+            api.salvar(_bankAccountEmployee)
+                .then(res => router.push('/bankaccountemployee'))
                 .catch(err => {
                     if (err.response?.data) {
                         var msg = "Erro: ";
@@ -94,66 +110,57 @@ export default function FormBankAccount({ id }) {
         {erro}
         <Form onSubmit={handleSubmit}>
             <Form.Group controlId="nome">
-                <Form.Label>Classificação da conta (credito/débito) </Form.Label>
-                <Form.Control name="classification" placeholder="Classificação"
-                    required defaultValue={classification}
-                    onChange={(e) => setclassification(e.target.value)}
-                />
-                <Form.Label>Descrição</Form.Label>
-                <Form.Control name="description" placeholder="Descrição"
-                    required defaultValue={description}
-                    onChange={(e) => setdescription(e.target.value)}
-                />
-                <Form.Label>Número da Conta</Form.Label>
-                <Form.Control name="accountNumber" placeholder="Nº desta conta"
-                    required defaultValue={accountNumber}
-                    onChange={(e) => setaccountNumber(e.target.value)}
-                />
-
-                <Form.Label>Agência</Form.Label>
-                <Form.Control name="agencyNumber" placeholder="Nº da agência"
-                    required defaultValue={agencyNumber}
-                    onChange={(e) => setagencyNumber(e.target.value)}
-                />
-                <Form.Label>Data de Criação da Conta</Form.Label>
-                <Form.Control name="inicialBalanceDate" placeholder="Abertura"
-                    required defaultValue={inicialBalanceDate}
-                    onChange={(e) => setinicialBalanceDate(e.target.value)}
-                />
-
-                <Form.Label>Saldo</Form.Label>
-                <Form.Control name="inicialBalance" placeholder="Valor em conta"
-                    required defaultValue={inicialBalance}
-                    onChange={(e) => setinicialBalance(e.target.value)}
-                />
-
-                <Form.Label>Código do banco</Form.Label>
-                <Form.Control name="bank" placeholder="Código do banco"
-                    required defaultValue={bank}
-                    onChange={(e) => setbank(e.target.value)}
-                />
-
-                <Form.Label>CNPJ da empresa</Form.Label>
+                <Form.Label>Banco</Form.Label>
                 <br/>
-                <Form.Select defaultValue={"Selecione"} size="lg" onChange={(e) => setCompanySelected(e)}>
-
-                    <option value="Selecione">Selecione</option>
-                    {companies.map((comp) => (
-                        <option selected={comp.cnpj == cnpjCompany }
-                            key={comp.id} 
-                        value={comp.cnpj}> {comp.corporateName} - {comp.cnpj}
-                        
-                        </option>
-                    ))}
-
+                <Form.Select defaultValue={"0"} size="lg" onChange={(e) => setBank(e.target.value)}>
+                    <option value="0">Selecione</option>
+                    {banks.map((comp) => (
+                    <option key={comp.id} value={comp.id} selected={comp.id == bank}>
+                    {comp.nameBank} - CNPJ:{comp.bankName} {comp.cnpj}
+                    </option>
+                ))}
+                <br/>
                 </Form.Select>
-
+                <br/>
+                <Form.Label>Funcionário</Form.Label>
+                <br/>
+                
+                <Form.Select defaultValue={"0"} size="lg" onChange={(e) => setEmployee(e.target.value)}>
+                    <option value="0">Selecione</option>
+                    {employees.map((comp) => (
+                    <option key={comp.id} value={comp.id} selected={comp.id == employee}>
+                    {comp.people.name} - CPF:{comp.people.cpf}
+                    </option>
+                ))}
+                </Form.Select>
+                <br/><br/>
+                <Form.Label>Agência</Form.Label>
+                <Form.Control name="Agencia" placeholder="Agência" 
+                    required defaultValue={agencia}
+                    onChange={(e) => setAgencia(e.target.value)}
+                />
+                <br/>
+                <Form.Label>Dígito Verificador Agência</Form.Label>
+                <Form.Control name="DV Agencia" placeholder="DV Agência" type='number'
+                    defaultValue={dvAgencia}
+                    onChange={(e) => setDvAgencia(e.target.value)}
+                />
+                <br/>
+                <Form.Label>Número da Conta</Form.Label>
+                <Form.Control name="Número da Conta" placeholder="Número da Conta" type='number'
+                    required defaultValue={conta}
+                    onChange={(e) => setConta(e.target.value)}/>
+                <br/>
+                <Form.Label>Dígito Verificador Conta</Form.Label>
+                <Form.Control name="Número da Conta" placeholder="DV Conta" type='number'
+                    required defaultValue={dvConta}
+                    onChange={(e) => setdvConta(e.target.value)}/>
 
             </Form.Group>
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/bankaccount')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/bankaccountemployee')}>
                         Cancelar
                     </Button>
                 </Col>
@@ -168,7 +175,7 @@ export default function FormBankAccount({ id }) {
 }
 
 
-FormBankAccount.defaultProps = {
+FormBankAccountEmployee.defaultProps = {
     id: undefined
 };
 
