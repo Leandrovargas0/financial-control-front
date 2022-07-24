@@ -26,6 +26,14 @@ export default function homeindex() {
                         <td>ADAHYLTON BARLATI TENÓRIO </td>
                         <td></td>
                     </tr>
+                    <tr>
+                        <td>RODRIGO SILVA NASCIMENTO MOURA</td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td>JOÃO MATHEUS DE PAULA CAMPOS</td>
+                    <td></td>
+                    </tr>
                 </tbody>
             </Table>
 

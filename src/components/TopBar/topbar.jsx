@@ -26,6 +26,7 @@ export default function TopBar() {
           
 
           <NavDropdown title="Cadastros" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/bank">Bancos (bank)</NavDropdown.Item>
             <NavDropdown.Item href="/company">Empresas (Company)</NavDropdown.Item>
             <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
             <NavDropdown.Item href="/accountchart">Planos de Contas (Account Chart)</NavDropdown.Item>
@@ -42,12 +43,12 @@ export default function TopBar() {
 
           
           <NavDropdown title="Pessoal" id="basic-nav-dropdown">
-            <NavDropdown.Item href="/bank">Bancos (bank)</NavDropdown.Item>
             <NavDropdown.Item href="/personaldata">Dados Pessoais</NavDropdown.Item>
             <NavDropdown.Item href="/professions">Cargos</NavDropdown.Item>
             <NavDropdown.Item href="/funds">Verbas</NavDropdown.Item>
             <NavDropdown.Item href="/healthplan">Planos de Saúde</NavDropdown.Item>
             <NavDropdown.Item href="/employee">Funcionários</NavDropdown.Item>
+            <NavDropdown.Item href="/bankaccountemployee">Funcionários</NavDropdown.Item>
 
 
             <NavDropdown.Divider />
