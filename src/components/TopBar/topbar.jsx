@@ -22,6 +22,9 @@ export default function TopBar() {
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
 
+
+          
+
           <NavDropdown title="Cadastros" id="basic-nav-dropdown">
             <NavDropdown.Item href="/company">Empresas (Company)</NavDropdown.Item>
             <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
@@ -30,6 +33,17 @@ export default function TopBar() {
             <NavDropdown.Item href="/customer">Clientes (Customers)</NavDropdown.Item>
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
             <NavDropdown.Item href="/products">Produtos (Products)</NavDropdown.Item>
+
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/login">
+              Sair
+            </NavDropdown.Item>
+          </NavDropdown>
+
+          
+          <NavDropdown title="Pessoal" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/bank">Bancos (bank)</NavDropdown.Item>
+
 
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
