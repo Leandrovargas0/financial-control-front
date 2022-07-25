@@ -175,7 +175,8 @@ export default function FormSale({ id }) {
             api.salvar(_entrypay)
                 .then(res => {
                     alert("Salvo");
-                    router.push('/sale/' + id)
+                    console.log(res);
+                    router.push('/sale/' + res.data.id)
                 })
                 .catch(err => {
                     if (err.response?.data) {
@@ -201,7 +202,7 @@ export default function FormSale({ id }) {
                     onChange={(e) => setvalue(e.target.value)}
                 />
                 <Form.Label>Data de Emissão (AAAA-MM-DD)</Form.Label>
-                <Form.Control name="emissionDate" placeholder="AAAA-MM-DD"
+                <Form.Control name="emissionDate" type='date'
                     required defaultValue={emissionDate}
                     onChange={(e) => setemissionDate(e.target.value)}
                 />

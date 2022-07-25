@@ -36,7 +36,7 @@ export default function Funds({ mostrar }) {
     <thead>
       <tr>
         <td>Verba</td>
-        <td>Provento</td>
+        <td>Código</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>

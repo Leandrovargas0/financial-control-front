@@ -11,6 +11,7 @@ export default function FormEmployee({ id }) {
     const [profession, setprofession] = useState("");
     const [funds, setfunds] = useState("");
     const [healthPlan, sethealthPlan] = useState("");
+    const [sector, setsector] = useState([]);
 
 
     const [companies, setCompanies] = useState([]);
@@ -18,6 +19,7 @@ export default function FormEmployee({ id }) {
     const [professions, setprofessions] = useState([]);
     const [fundss, setfundss] = useState([]);
     const [healthPlans, sethealthPlans] = useState([]);
+    const [sectors, setsectors] = useState([]);
 
 
 
@@ -31,6 +33,7 @@ export default function FormEmployee({ id }) {
     const api4 = new Api('/professions');
     const api5 = new Api('/funds');
     const api6 = new Api('/healthplan');
+    const api7 = new Api('/sector');
 
     useEffect(() => {
         try {
@@ -71,6 +74,13 @@ export default function FormEmployee({ id }) {
         catch (erro) { }
 
         try {
+            api7.listar()
+                .then((res) => setsectors(res.data))
+                .catch(err => setErro("Erro ao recuperar entidade!"));
+        }
+        catch (erro) { }
+
+        try {
             if (id != undefined) {
                 api.listar(id)
                     .then((res) => setCamposJson(res))
@@ -87,6 +97,8 @@ export default function FormEmployee({ id }) {
         setprofession(res.data['profession']['id']);
         setfunds(res.data['funds']['id']);
         sethealthPlan(res.data['healthPlan']['id']);
+        setsector(res.data['sector']['id']);
+    
     }
 
 
@@ -112,6 +124,12 @@ export default function FormEmployee({ id }) {
                 profession: {
                     id: profession
                 },
+                sector: {
+                    id: sector
+                },
+
+
+            
 
             };
 
@@ -150,7 +168,19 @@ export default function FormEmployee({ id }) {
                 </Form.Select>
 
                 <br /> <br />
+                <Form.Label>Setor</Form.Label>
+                <br />
+                <Form.Select defaultValue={"0"} size="lg" onChange={(e) => setsector(e.target.value)}>
 
+                    <option value="0">Selecione</option>
+                    {sectors.map((comp) => (
+                        <option key={comp.id} value={comp.id} selected={comp.id == sector}>
+                            {comp.nameSector}
+                        </option>
+                    ))}
+                </Form.Select>
+
+                <br /> <br />
 
                 <Form.Label>Pessoa</Form.Label>
                 <br />

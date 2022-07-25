@@ -66,7 +66,7 @@ export default function FormFunds({ id }) {
                     required defaultValue={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <Form.Label>1 - PROVENTO | 2-DESCONTO</Form.Label>
+                <Form.Label>Código da Verba</Form.Label>
              
                 <Form.Control name="provento" placeholder="1|2"
                     required defaultValue={provento}

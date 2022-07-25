@@ -18,12 +18,12 @@ export default function Employees({ mostrar }) {
       .catch(err => router.push('/login'));
   };
 
-  const provdesc = (provento) => {
-    if ( provento == 1 || provento == "1" )
-    { return "Provento" }else{return "Desconto"}
+  // const provdesc = (provento) => {
+  //   if ( provento == 1 || provento == "1" )
+  //   { return "Provento" }else{return "Desconto"}
      
     
-  };
+  // };
 
 
 
@@ -58,7 +58,7 @@ export default function Employees({ mostrar }) {
           <td>{comp.people.name}</td>
           <td>{comp.company.corporateName}</td>
           <td>{comp.profession.professionName}</td>
-          <td>{comp.funds.name} | {provdesc(comp.funds.provento) }</td>
+          <td>{comp.funds.name} | {comp.funds.provento}</td>
           <td>{comp.healthPlan.operadora}</td>
 
           {mostrar && <td><Button variant="info" href={"employee/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>

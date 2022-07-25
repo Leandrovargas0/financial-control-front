@@ -90,7 +90,7 @@ export default function FormPersonalData({ id }) {
                     onChange={(e) => setcpf(e.target.value)}
                 />
                 <Form.Label>Data de Nascimento</Form.Label>
-                <Form.Control name="birthDate" placeholder="AAAA-MM-DD"
+                <Form.Control name="birthDate" placeholder="AAAA-MM-DD" type='date'
                     required defaultValue={birthDate}
                     onChange={(e) => setbirthDate(e.target.value)}
                 />

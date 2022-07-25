@@ -109,7 +109,7 @@ export default function FormPatrimony({ id }) {
                     onChange={(e) => setvaluePatrimony(e.target.value)}
                 />
                 <Form.Label>Data Compra (AAAA-MM-DD)</Form.Label>
-                <Form.Control name="buyDate" placeholder="AAAA-MM-DD"
+                <Form.Control name="buyDate" type='date'
                     required defaultValue={buyDate}
                     onChange={(e) => setbuyDate(e.target.value)}
                 />
