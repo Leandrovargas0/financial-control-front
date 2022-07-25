@@ -116,7 +116,7 @@ export default function FormBankAccount({ id }) {
                     onChange={(e) => setagencyNumber(e.target.value)}
                 />
                 <Form.Label>Data de Criação da Conta</Form.Label>
-                <Form.Control name="inicialBalanceDate" placeholder="Abertura"
+                <Form.Control name="inicialBalanceDate" placeholder="Abertura" type='date'
                     required defaultValue={inicialBalanceDate}
                     onChange={(e) => setinicialBalanceDate(e.target.value)}
                 />

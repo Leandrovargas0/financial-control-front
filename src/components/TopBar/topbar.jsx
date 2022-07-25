@@ -21,8 +21,8 @@ export default function TopBar() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-
           <NavDropdown title="Cadastros" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/bank">Bancos (bank)</NavDropdown.Item>
             <NavDropdown.Item href="/company">Empresas (Company)</NavDropdown.Item>
             <NavDropdown.Item href="/bankaccount">Contas Bancárias (Bank Account)</NavDropdown.Item>
             <NavDropdown.Item href="/accountchart">Planos de Contas (Account Chart)</NavDropdown.Item>
@@ -31,6 +31,22 @@ export default function TopBar() {
             <NavDropdown.Item href="/provider">Fornecedores (Providers)</NavDropdown.Item>
             <NavDropdown.Item href="/products">Produtos (Products)</NavDropdown.Item>
 
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/login">
+              Sair
+            </NavDropdown.Item>
+          </NavDropdown>
+
+          
+          <NavDropdown title="Pessoal" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/personaldata">Dados Pessoais</NavDropdown.Item>
+            <NavDropdown.Item href="/professions">Cargos</NavDropdown.Item>
+            <NavDropdown.Item href="/sector">Setores</NavDropdown.Item>
+            <NavDropdown.Item href="/funds">Verbas</NavDropdown.Item>
+            <NavDropdown.Item href="/healthplan">Planos de Saúde</NavDropdown.Item>
+            <NavDropdown.Item href="/employee">Funcionários</NavDropdown.Item>
+            <NavDropdown.Item href="/bankaccountemployee">Contas Bancárias (Funcionários)</NavDropdown.Item>
+            <NavDropdown.Item href="/payroll">Folha de Pagamento</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">
               Sair
@@ -52,6 +68,7 @@ export default function TopBar() {
           </NavDropdown>
 
           <NavDropdown title="Área Legal" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/law">Leis</NavDropdown.Item>
             <NavDropdown.Item href="/tax">Impostos</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/login">

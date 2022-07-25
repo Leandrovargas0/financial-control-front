@@ -8,13 +8,24 @@ export default function FormTax({ id }) {
     const [percent, setpercent] = useState("");
     const [nameTax, setnameTax] = useState("");
     const [scope, setscope] = useState("");
+    const [law, setlaw] = useState("");
 
+    const [laws, setlaws] = useState([]);
     const [erro, setErro] = useState(false);
     const router = useRouter();
 
     const api = new Api(id == undefined ? '/tax/new' : '/tax');
-
+    const api2 = new Api('/law');
     useEffect(() => {
+
+        try {
+            api2.listar()
+                .then((res) => setlaws(res.data))
+                .catch(err => setErro("Erro ao recuperar entidade!"));
+        }
+        catch (erro) { }
+
+
         try {
             if (id != undefined) {
                 api.listar(id)
@@ -31,6 +42,7 @@ export default function FormTax({ id }) {
         setpercent((res.data['percent']).toString().replace(",", "."));
         setnameTax(res.data['nameTax']);
         setscope(res.data['scope']);
+        setlaw(res.data['law']['id']);
     }
 
     const handleSubmit = (e) => {
@@ -41,6 +53,9 @@ export default function FormTax({ id }) {
                 percent: percent.replace(",", "."),
                 nameTax: nameTax,
                 scope: scope,
+                law: {
+                    id: law
+                }
             };
             api.salvar(compania)
                 .then(res => router.push('/tax'))
@@ -78,11 +93,27 @@ export default function FormTax({ id }) {
                     required defaultValue={percent}
                     onChange={(e) => setpercent(e.target.value)}
                 />
+
+
+
+                <br /> <br />
+
+                <Form.Label>Lei</Form.Label>
+                <br />
+                <Form.Select defaultValue={"0"} size="lg" onChange={(e) => setlaw(e.target.value)}>
+
+                    <option value="0">Selecione</option>
+                    {laws.map((comp) => (
+                        <option key={comp.id} value={comp.id} selected={comp.id == law}>
+                            {comp.lawNumber}
+                        </option>
+                    ))}
+                </Form.Select>
             </Form.Group>
 
             <Row className="justify-content-end mt-3">
                 <Col md="auto">
-                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/company')}>
+                    <Button variant="outline-secondary" type="button" onClick={() => router.push('/tax')}>
                         Cancelar
                     </Button>
                 </Col>

@@ -3,23 +3,24 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Api } from '../../services/api';
 
-export default function Sales({ mostrar }) {
-  const [bankaccount, setBankAccount] = useState([]);
+export default function Healthplans({ mostrar }) {
+  const [healthPlan, sethealthPlan] = useState([]);
   const router = useRouter();
-  const api = new Api('/sale');
+  const api = new Api('/healthplan');
 
   useEffect(() => listar(), []);
 
   const listar = () => {
     api.listar()
       .then(res => {
-        setBankAccount(res.data);
+        //alert(res.data.length)
+        sethealthPlan(res.data);
       })
       .catch(err => router.push('/login'));
   };
 
   const handleDelete = (id) => {
-    if (confirm("Deseja remover este recibo de pagamento?")) {
+    if (confirm("Deseja remover o Plano de Saúde?")) {
       try {
         api.remover(id)
           .then(res => listar())
@@ -34,21 +35,17 @@ export default function Sales({ mostrar }) {
   return <Table striped bordered hover>
     <thead>
       <tr>
-        <td>Valor</td>
-        <td>Comprador</td>
-        <td>Data da Venda</td>
+        <td>Operadora</td>
+        <td>Código ANS</td>
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
     <tbody>
-      {bankaccount?.map((comp) => (
+      {healthPlan?.map((comp) => (
         <tr key={comp.id}>
-          <td>{comp.value}</td>
-          <td>{comp.customer.corporateName}</td>
-          <td>{comp.emissionDate}</td>
-          
-          {mostrar && <td><Button variant="info" href={"sale/" + comp.id}>Editar</Button>
-
+          <td>{comp.operadora}</td>
+          <td>{comp.codigoAns}</td>
+          {mostrar && <td><Button variant="info" href={"healthplan/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
           </td>}
         </tr>
       ))
@@ -57,6 +54,6 @@ export default function Sales({ mostrar }) {
   </Table>;
 }
 
-Sales.defaultProps = {
+Healthplans.defaultProps = {
   mostrar: false
 };

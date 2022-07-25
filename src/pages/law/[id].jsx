@@ -1,10 +1,10 @@
 import Layout from "../../components/Layout/layout";
-import FormBankAccount from '../../components/Bankaccount/formbankaccount';
+import FormLaw from '../../components/Law/formlaw';
 import { useRouter } from "next/router";
 
 import React, { useState, useEffect } from 'react';
 
-export default function EditbankAc() {
+export default function EditLaw() {
 
     const router = useRouter();
 
@@ -16,8 +16,8 @@ export default function EditbankAc() {
 
     useEffect(() => getAndSetIdCompany());
 
-    return <Layout title={"Editar Banco"}>
-        <FormBankAccount id={id}></FormBankAccount>
+    return <Layout title={"Editar Lei"}>
+        <FormLaw id={id}></FormLaw>
     </Layout>
 }
 

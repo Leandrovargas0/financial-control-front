@@ -3,23 +3,23 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Api } from '../../services/api';
 
-export default function Sales({ mostrar }) {
-  const [bankaccount, setBankAccount] = useState([]);
+export default function Laws({ mostrar }) {
+  const [company, setCompany] = useState([]);
   const router = useRouter();
-  const api = new Api('/sale');
+  const api = new Api('/law');
 
   useEffect(() => listar(), []);
 
   const listar = () => {
     api.listar()
       .then(res => {
-        setBankAccount(res.data);
+        setCompany(res.data);
       })
       .catch(err => router.push('/login'));
   };
 
   const handleDelete = (id) => {
-    if (confirm("Deseja remover este recibo de pagamento?")) {
+    if (confirm("Deseja remover a Lei?")) {
       try {
         api.remover(id)
           .then(res => listar())
@@ -34,21 +34,19 @@ export default function Sales({ mostrar }) {
   return <Table striped bordered hover>
     <thead>
       <tr>
-        <td>Valor</td>
-        <td>Comprador</td>
-        <td>Data da Venda</td>
+        <td>Némero da Lei</td>
+        <td>Texto/Descrição da Lei</td>
+
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
     <tbody>
-      {bankaccount?.map((comp) => (
+      {company?.map((comp) => (
         <tr key={comp.id}>
-          <td>{comp.value}</td>
-          <td>{comp.customer.corporateName}</td>
-          <td>{comp.emissionDate}</td>
           
-          {mostrar && <td><Button variant="info" href={"sale/" + comp.id}>Editar</Button>
-
+          <td>{comp.lawNumber}</td>
+          <td>{comp.lawDescription}</td>
+          {mostrar && <td><Button variant="info" href={"law/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
           </td>}
         </tr>
       ))
@@ -57,6 +55,6 @@ export default function Sales({ mostrar }) {
   </Table>;
 }
 
-Sales.defaultProps = {
+Laws.defaultProps = {
   mostrar: false
 };

@@ -117,13 +117,13 @@ export default function FormEntrypay({ id }) {
                     onChange={(e) => settitleValue(e.target.value)}
                 />
                 <Form.Label>Data de Emissão</Form.Label>
-                <Form.Control name="emissionDate" placeholder="AAAA-MM-DD"
+                <Form.Control name="emissionDate"  type='date'
                     required defaultValue={emissionDate}
                     onChange={(e) => setemissionDate(e.target.value)}
                 />
 
                 <Form.Label>Data de Vencimento</Form.Label>
-                <Form.Control name="dueDate" placeholder="AAAA-MM-DD"
+                <Form.Control name="dueDate" type='date'
                     required defaultValue={dueDate}
                     onChange={(e) => setdueDate(e.target.value)}
                 />
