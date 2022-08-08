@@ -31,18 +31,20 @@ export default function Payrolls({ mostrar }) {
     }
   };
 
+  const pushId = (id) => {
+    var token = id;
+
+    window.localStorage.setItem("payroll_id", token);
+    router.push('payroll/' + id);
+
+  }
+
 
   return <Table striped bordered hover>
     <thead>
       <tr>
         <td>Nome</td>
-        <td>CPF</td>
-        <td>Cargo</td>
-        <td>Verba</td>
-        <td>Valor Bruto</td>
-        <td>Valor Descontos</td>
-        <td>Valor Líquido</td>
-        <td>Data Pagamento</td>
+
         {mostrar && <td style={{ width: 200 }}>Ações</td>}
       </tr>
     </thead>
@@ -50,15 +52,23 @@ export default function Payrolls({ mostrar }) {
       {payroll?.map((comp) => (
         <tr key={comp.id}>
           <td>{comp.employee.people.name}</td>
+
+          {/* <td>{comp.employee.people.name}</td>
           <td>{comp.employee.people.cpf}</td>
           <td>{comp.employee.profession.professionName}</td>
           <td>{comp.employee.funds.name}</td>
           <td>R$ {comp.valorBruto}</td>
           <td>R$ {comp.valorDesconto}</td>
           <td>R$ {comp.valorLiquido}</td>
-          <td>{comp.dataPagamento}</td>
+          <td>{comp.dataPagamento}</td> */}
 
-          {mostrar && <td><Button variant="info" href={"payroll/" + comp.id}>Editar</Button><Button className="ml-2" onClick={() => handleDelete(comp.id)} variant="danger">Remover</Button>
+          {mostrar && <td>
+            <Button variant="info" onClick={() => pushId(comp.id)} >
+              Editar
+          </Button>
+
+            <Button className="ml-2" onClick={() => handleDelete(comp.id)}
+              variant="danger">Remover</Button>
           </td>}
         </tr>
       ))
